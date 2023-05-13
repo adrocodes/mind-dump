@@ -1,7 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const articles = await Astro.glob("./article/*.mdx");
 ---
 
 <Layout title="Welcome to Astro.">
-	<main></main>
+	<main class="prose prose-invert prose-2xl">
+		<h2>Articles</h2>
+		<div>
+			{
+				articles.map((article) => (
+					<a
+						href={article.url}
+						class="no-underline flex mb-4 border-b hover:bg-blue-600 hover:pl-4 transition-all"
+					>
+						{article.frontmatter.title}
+					</a>
+				))
+			}
+		</div>
+	</main>
 </Layout>
